@@ -1,4 +1,4 @@
-# Portal de Proveedores - The Fuentes Corporation
+# Portal de Proveedores
 
 Este proyecto es una aplicación web diseñada para la gestión y recepción de expedientes digitales de proveedores. Permite a los usuarios registrarse, iniciar sesión y cargar documentación fiscal y legal requerida de manera organizada e intuitiva.
 
