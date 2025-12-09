@@ -1,20 +1,22 @@
 <script setup>
+
+import { ref } from 'vue';
+
+
 const props = defineProps({
     fieldId:{
         type: Number,
         required: true
-    } // El ID de la fila (ej. 'acta')
+    } 
 });
 
-// 2. Definir los eventos que el componente puede emitir
+
 const emit = defineEmits(['file-selected']);
 
-// 3. Función que se llama al hacer clic en el botón estilizado
+const fileInputRef = ref(null);
+
 function triggerFileInput() {
-    const inputElement = document.getElementById('file-input-oculto');
-    if (inputElement) {
-        inputElement.click();
-    }
+    fileInputRef.value.click();
 }
 
 // 4. Función que se llama cuando se selecciona un archivo
@@ -23,6 +25,7 @@ function handleFileChange(event) {
     if (file) {
         // Emitir el archivo seleccionado al componente padre para que lo procese
         emit('file-selected', file, props.fieldId);
+        event.target.value = null;
         console.log("Props: "+ props.fieldId);
     }
 }
@@ -41,6 +44,6 @@ function handleFileChange(event) {
             <span>Cargar Documento</span>
         </button>
 
-        <input id="file-input-oculto" type="file" @change="handleFileChange" class="hidden" />
+        <input ref="fileInputRef" type="file" @change="handleFileChange" class="hidden" />
     </div>
 </template>
