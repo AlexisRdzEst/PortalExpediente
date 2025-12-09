@@ -1,6 +1,21 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
+import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TablaExpediente from '@/Layouts/TablaExpediente.vue';
+import { ref } from 'vue';
+
+const documentosDelExpediente = ref([]);
+
+function recibirDocumentos(archivos) {
+    documentosDelExpediente.value = archivos;
+    console.log("El padre recibió estos archivos:", documentosDelExpediente.value);
+}
+
+const submitExpediente = () => {
+    // Aquí usarías documentosDelExpediente.value para armar tu FormData
+    console.log("Enviando al backend:", documentosDelExpediente.value);
+};
+
 </script>
 
 <template>
@@ -23,9 +38,14 @@ import TablaExpediente from '@/Layouts/TablaExpediente.vue';
                 Aqui estan enlistados cada uno de lo Documentos del expediente del Proveedor [NOMBRE DEL PROVEEDOR], es
                 importante tener el catalago completo para temas fiscales.
             </p>
-            <TablaExpediente>
-                
+            <TablaExpediente @update-files="recibirDocumentos">
+
             </TablaExpediente>
+            <div class="flex justify-center my-10">
+                <PrimaryButton @click="submitExpediente" color="orange" type="button">
+                    Enviar Documentacion
+                </PrimaryButton>
+            </div>
         </div>
     </div>
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue'; 
 import FilaTablaExpediente from '@/Components/FilaTablaExpediente.vue';
 import FileUploadButton from '@/Components/FileUploadButton.vue'; //
 
@@ -19,7 +19,13 @@ const documentos = ref([
     "Ultima declaracion informativa de Operaciones con terceros (DIOT) presentada"
 ]);
 
+const emit = defineEmits(['update-files']);
+
 const archivosSeleccionados = ref([]);
+
+watch(archivosSeleccionados, (nuevoValor) => {
+    emit('update-files', nuevoValor);
+}, { deep: true });
 
 // --- CORRECCIÓN 1: Eliminamos createUploadHandler porque no es necesaria ---
 
