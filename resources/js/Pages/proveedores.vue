@@ -1,6 +1,7 @@
 <script setup>
 import { Head } from '@inertiajs/vue3';
-import { ref } from 'vue';
+import { ref, onMounted } from 'vue';
+import $ from 'jquery';
 
 //variables ractivas
 const ListadoProovedores = ref([
@@ -47,19 +48,31 @@ const ListadoProovedores = ref([
 ]);
 
 onMounted(() => {
-    // 2. Esperar al siguiente ciclo de tick de Vue para asegurar que el v-for ha renderizado todas las filas
-    // Opcional: Podrías usar nextTick() si tienes problemas de renderizado asíncrono.
-
-    // 3. Seleccionar la tabla por su ID e inicializar Datatables
+    if ($.fn.DataTable.isDataTable('#tabla-proveedores')) {
+        $('#tabla-proveedores').DataTable().destroy();
+    }
     $('#tabla-proveedores').DataTable({
+        // 💥 Le pasamos el array de objetos directamente 💥
+        data: ListadoProovedores.value, 
+        
+        // 💥 Definimos el mapeo de columnas 💥
+        columns: [
+            { data: 'Nombre', title: 'Nombre de la Empresa', className: 'text-left' }, // Col 1
+            { data: 'Estatus', title: 'Estatus', className: 'text-left' },             // Col 2
+            { 
+                data: null, // Columna de acción no tiene un dato fijo
+                defaultContent: '<button class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-1 px-3 rounded-md shadow">Ver</button>', 
+                title: '',
+                orderable: false, // Deshabilita la ordenación en esta columna
+                className: 'text-center'
+            }                                                                           // Col 3
+        ],
+        
         // Opciones de configuración de Datatables:
         paging: true,
         ordering: true,
         searching: true,
         info: true,
-        language: {
-             url: '//cdn.datatables.net/plug-ins/1.10.21/i18n/Spanish.json' 
-        }
     });
 });
 
@@ -86,24 +99,13 @@ onMounted(() => {
                 la consulta de su expediente fiscal.
             </p>
             <div class="w-full max-w-4xl bg-white rounded-xl overflow-hidden mb-5">
-                <table id="tabla-proveedores" class="w-full table-fixed">
+                <table id="tabla-proveedores" class=" display w-full table-fixed">
                     <thead class="bg-gray-700 text-white p-4">
                         <th>Nombre de la Empresa</th>
                         <th>Estatus</th>
                         <th></th>
                     </thead>
                     <tbody>
-                        <tr lass="border-b border-gray-200" v-for="proveedor in ListadoProovedores">
-                            <td class="text-gray-800 text-lg p-4 align-center">
-                                {{ proveedor.Nombre }}
-                            </td>
-                            <td class="text-gray-800 text-lg p-4 align-center">
-                                {{ proveedor.Estatus }}
-                            </td>
-                            <td class="text-gray-800 text-lg p-4 align-center">
-                                
-                            </td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
