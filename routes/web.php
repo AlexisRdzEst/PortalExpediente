@@ -52,4 +52,8 @@ Route::get('/expediente', function () {
     return Inertia::render('expediente');
 })->name('expediente.index');
 
+Route::get('/proveedores', function () {
+    return Inertia::render('proveedores');
+})->name('proveedores.index');
+
 require __DIR__.'/auth.php';

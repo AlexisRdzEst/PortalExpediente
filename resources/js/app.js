@@ -1,5 +1,9 @@
 import './bootstrap';
 import '../css/app.css';
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+import 'datatables.net';
+import 'datatables.net-dt';
 
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/vue3';
