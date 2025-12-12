@@ -1,6 +1,53 @@
+@import 'datatables.net-dt/css/jquery.dataTables.min.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import 'datatables.net-dt/css/jquery.dataTables.min.css';
 
+/* Contenedor principal de Datatables */
+div.dataTables_wrapper {
+    @apply p-4 bg-white shadow-xl rounded-xl;
+}
 
+/* 💥 BÚSQUEDA / FILTRO 💥 */
+div.dataTables_filter {
+    @apply mb-4 flex justify-end; 
+}
+
+div.dataTables_filter label {
+    @apply font-semibold text-gray-700 text-sm flex items-center;
+}
+
+div.dataTables_filter input {
+    /* Usamos !important en el borde para anular cualquier estilo base que persista */
+    @apply ml-2 p-2 border border-gray-300 rounded-lg w-64 text-sm 
+           focus:ring-blue-500 focus:border-blue-500 shadow-sm transition 
+           bg-white !important; 
+}
+
+/* 💥 PAGINACIÓN 💥 */
+div.dataTables_paginate {
+    @apply pt-3 flex justify-end;
+}
+
+/* Estilo Base de Botones de Paginación */
+div.dataTables_paginate .paginate_button {
+    /* Forzamos el estilo de botón de Tailwind */
+    @apply px-3 py-1 mx-0.5 border border-gray-300 rounded-lg bg-gray-50 
+           hover:bg-gray-200 transition duration-150 text-sm !important;
+    box-shadow: none !important; /* Quita el estilo 3D crudo */
+}
+
+/* Botón Activo */
+div.dataTables_paginate .paginate_button.current {
+    @apply bg-blue-600 text-white font-bold border-blue-600 !important;
+}
+
+/* 💥 SELECTOR DE ENTRADAS / LENGTH 💥 */
+div.dataTables_length select {
+    @apply mx-2 p-1 border border-gray-300 rounded-lg text-sm bg-white !important;
+}
+
+/* 💥 INFORMACIÓN DE REGISTROS 💥 */
+div.dataTables_info {
+    @apply text-sm text-gray-600 pt-3;
+}
