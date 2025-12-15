@@ -99,7 +99,7 @@ onMounted(() => {
                 la consulta de su expediente fiscal.
             </p>
             <div class="w-full max-w-4xl bg-white rounded-xl overflow-hidden mb-5">
-                <table id="tabla-proveedores" class=" stripe w-full table-fixed">
+                <table id="tabla-proveedores" class="w-full table-fixed">
                     <thead class="bg-gray-700 text-white p-4">
                         <th>Nombre de la Empresa</th>
                         <th>Estatus</th>
