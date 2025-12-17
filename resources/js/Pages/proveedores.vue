@@ -98,8 +98,8 @@ onMounted(() => {
                 Aqui estan enlistado todo el catalago de proveedores de The Fuentes, para 
                 la consulta de su expediente fiscal.
             </p>
-            <div class="w-full max-w-4xl bg-white rounded-xl overflow-hidden mb-5">
-                <table id="tabla-proveedores" class="w-full table-fixed">
+            <div class="">
+                <table id="tabla-proveedores">
                     <thead class="bg-gray-700 text-white p-4">
                         <th>Nombre de la Empresa</th>
                         <th>Estatus</th>
